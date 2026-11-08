@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <PackageTags>WiX Visual C++ Redistributable</PackageTags>
+    <PackageProjectUrl>https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist</PackageProjectUrl>
+
+    <Authors>Bonsai Foundation</Authors>
+    <Copyright>Copyright © Bonsai Foundation CIC and Contributors</Copyright>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <Description>WiX bootstrapper support for the Microsoft Visual C++ 2015-2022 Redistributable. The official installers are downloaded from Microsoft at build time.</Description>
+    <PackageTags>$(PackageTags) VC143</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="build\$(MSBuildProjectName).targets" Pack="true" PackagePath="build" />
+  </ItemGroup>
+
+</Project>

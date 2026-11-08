@@ -1,0 +1,37 @@
+<Project>
+
+  <PropertyGroup>
+    <VCRedistVersion>14.44.35211</VCRedistVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <VCRedistInstaller Include="x64">
+      <Url>https://download.visualstudio.microsoft.com/download/pr/990c720a-46ce-4dc7-87b9-c2eb615d34b9/CC0FF0EB1DC3F5188AE6300FAEF32BF5BEEBA4BDD6E8E445A9184072096B713B/VC_redist.x64.exe</Url>
+      <Sha256>CC0FF0EB1DC3F5188AE6300FAEF32BF5BEEBA4BDD6E8E445A9184072096B713B</Sha256>
+    </VCRedistInstaller>
+    <VCRedistInstaller Include="x86">
+      <Url>https://download.visualstudio.microsoft.com/download/pr/990c720a-46ce-4dc7-87b9-c2eb615d34b9/0C09F2611660441084CE0DF425C51C11E147E6447963C3690F97E0B25C55ED64/VC_redist.x86.exe</Url>
+      <Sha256>0C09F2611660441084CE0DF425C51C11E147E6447963C3690F97E0B25C55ED64</Sha256>
+    </VCRedistInstaller>
+  </ItemGroup>
+
+  <Target Name="DownloadVCRedist" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <VCRedistDirectory Condition="'$(VCRedistDirectory)' == ''">$([MSBuild]::NormalizeDirectory($(MSBuildProjectDirectory), $(BaseIntermediateOutputPath), 'vcredist', $(VCRedistVersion)))</VCRedistDirectory>
+    </PropertyGroup>
+
+    <DownloadFile SourceUrl="%(VCRedistInstaller.Url)"
+                  DestinationFolder="$(VCRedistDirectory)"
+                  DestinationFileName="vc_redist.%(VCRedistInstaller.Identity).exe"
+                  Condition="!Exists('$(VCRedistDirectory)vc_redist.%(VCRedistInstaller.Identity).exe')" />
+    <VerifyFileHash File="$(VCRedistDirectory)vc_redist.%(VCRedistInstaller.Identity).exe"
+                    Hash="%(VCRedistInstaller.Sha256)" />
+
+    <PropertyGroup>
+      <VCRedistX64Path>$(VCRedistDirectory)vc_redist.x64.exe</VCRedistX64Path>
+      <VCRedistX86Path>$(VCRedistDirectory)vc_redist.x86.exe</VCRedistX86Path>
+      <DefineConstants>$(DefineConstants);VCRedistVersion=$(VCRedistVersion);VCRedistMinor=$([System.Version]::Parse($(VCRedistVersion)).Minor);VCRedistBuild=$([System.Version]::Parse($(VCRedistVersion)).Build);VCRedistX64Path=$(VCRedistX64Path);VCRedistX86Path=$(VCRedistX86Path)</DefineConstants>
+    </PropertyGroup>
+  </Target>
+
+</Project>

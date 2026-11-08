@@ -1,0 +1,11 @@
+root = true
+
+[*]
+indent_style = space
+
+[*.{csproj,props,targets,wixproj,wxs,slnx}]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+charset = utf-8

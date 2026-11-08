@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define VCRedistRuntimesKey="SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes"?>
+
+  <Bundle Name="VCRedist Test"
+          Version="1.0.0"
+          Manufacturer="Bonsai Foundation"
+          UpgradeCode="D171E955-8D3F-4B7C-97AE-0E941D5FC72F">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication LicenseUrl="" />
+    </BootstrapperApplicationRef>
+
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRedistRuntimesKey)\x64" Value="Minor" Variable="VCRedistX64Minor" Win64="yes" />
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRedistRuntimesKey)\x64" Value="Bld" Variable="VCRedistX64Build" Win64="yes" />
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRedistRuntimesKey)\x86" Value="Minor" Variable="VCRedistX86Minor" Win64="no" />
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRedistRuntimesKey)\x86" Value="Bld" Variable="VCRedistX86Build" Win64="no" />
+
+    <Chain>
+      <ExePackage Id="VCRedistX86"
+                  SourceFile="$(var.VCRedistX86Path)"
+                  InstallCommand="/install /quiet /norestart"
+                  Permanent="yes"
+                  InstallCondition="NOT VersionNT64"
+                  DetectCondition="VCRedistX86Minor &gt; $(var.VCRedistMinor) OR (VCRedistX86Minor = $(var.VCRedistMinor) AND VCRedistX86Build &gt;= $(var.VCRedistBuild))">
+        <ExitCode Value="1638" Behavior="success" />
+      </ExePackage>
+      <ExePackage Id="VCRedistX64"
+                  SourceFile="$(var.VCRedistX64Path)"
+                  InstallCommand="/install /quiet /norestart"
+                  Permanent="yes"
+                  InstallCondition="VersionNT64"
+                  DetectCondition="VCRedistX64Minor &gt; $(var.VCRedistMinor) OR (VCRedistX64Minor = $(var.VCRedistMinor) AND VCRedistX64Build &gt;= $(var.VCRedistBuild))">
+        <ExitCode Value="1638" Behavior="success" />
+      </ExePackage>
+    </Chain>
+  </Bundle>
+</Wix>
