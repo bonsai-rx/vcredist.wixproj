@@ -25,7 +25,7 @@ A bundle can install the redistributable, and skip it when the same or a later v
               InstallCommand="/install /quiet /norestart"
               Permanent="yes"
               InstallCondition="VersionNT64"
-              DetectCondition="VCRedistX64Minor &gt; $(var.VCRedistMinor) OR (VCRedistX64Minor = $(var.VCRedistMinor) AND VCRedistX64Build &gt;= $(var.VCRedistBuild))">
+              DetectCondition="VCRedistX64Minor > $(var.VCRedistMinor) OR (VCRedistX64Minor = $(var.VCRedistMinor) AND VCRedistX64Build >= $(var.VCRedistBuild))">
     <ExitCode Value="1638" Behavior="success" />
   </ExePackage>
 </Chain>
