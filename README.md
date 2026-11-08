@@ -1,12 +1,12 @@
-# vcredist.wixproj
+# Bonsai.Wix
 
 WiX bootstrapper support for the Microsoft Visual C++ Redistributable.
 
-The `vcredist.wixproj.vc143` package adds the official Microsoft Visual C++ 2015-2022 Redistributable installers to a WiX bootstrapper project. The installers are downloaded from Microsoft when the project builds, checked against a pinned SHA-256 hash, and passed to WiX as preprocessor variables, so the package itself contains only build scripts.
+The `Bonsai.Wix.vc143.redist` package adds the official Microsoft Visual C++ 2015-2022 Redistributable installers to a WiX bootstrapper project. The installers are downloaded from Microsoft when the project builds, checked against a pinned SHA-256 hash, and passed to WiX as preprocessor variables, so the package itself contains only build scripts.
 
 ## Usage
 
-Reference the package from the WiX project. A WiX v3 project that uses `packages.config` also imports `build\vcredist.wixproj.vc143.targets` from the package, which Visual Studio adds when installing it. The first build needs internet access to download the installers, and later builds reuse them from the intermediate output folder.
+Reference the package from the WiX project. A WiX v3 project that uses `packages.config` also imports `build\Bonsai.Wix.vc143.redist.targets` from the package, which Visual Studio adds when installing it. The first build needs internet access to download the installers, and later builds reuse them from the intermediate output folder.
 
 The package defines the following preprocessor variables:
 

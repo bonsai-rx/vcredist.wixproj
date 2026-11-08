@@ -30,5 +30,5 @@
     </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
-  <Import Project="$(TestsDirectory)packages\vcredist.wixproj.vc143\build\vcredist.wixproj.vc143.targets" />
+  <Import Project="$(TestsDirectory)packages\Bonsai.Wix.vc143.redist\build\Bonsai.Wix.vc143.redist.targets" />
 </Project>

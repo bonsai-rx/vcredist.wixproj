@@ -1,4 +1,4 @@
-name: vcredist.wixproj
+name: Bonsai.Wix
 on:
   push:
     branches: ['**']
@@ -63,7 +63,7 @@ jobs:
         run: nuget install WiX -Version 3.14.1 -ExcludeVersion -OutputDirectory artifacts/tests/tools -NonInteractive
 
       - name: Install built package
-        run: nuget install vcredist.wixproj.vc143 -Prerelease -ExcludeVersion -Source ${{github.workspace}}/artifacts/package/release -OutputDirectory artifacts/tests/packages -NonInteractive
+        run: nuget install Bonsai.Wix.vc143.redist -Prerelease -ExcludeVersion -Source ${{github.workspace}}/artifacts/package/release -OutputDirectory artifacts/tests/packages -NonInteractive
 
       - name: Build test bundle
         run: msbuild tests/Bundle/Bundle.wixproj -nologo
