@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <PackageType>Dependency</PackageType>
+    <IncludeSymbols>false</IncludeSymbols>
+    <PackageReadmeSourcePath>$(MSBuildThisFileDirectory)../README.md</PackageReadmeSourcePath>
+  </PropertyGroup>
+</Project>

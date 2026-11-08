@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TestsDirectory>$(MSBuildThisFileDirectory)..\..\artifacts\tests\</TestsDirectory>
+  </PropertyGroup>
+  <Import Project="$(TestsDirectory)tools\WiX\build\wix.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.14</ProductVersion>
+    <ProjectGuid>{77D0B9BE-9CB7-473D-A4F1-DBF68E53C993}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>Bundle</OutputName>
+    <OutputType>Bundle</OutputType>
+    <OutputPath>$(TestsDirectory)bin\</OutputPath>
+    <BaseIntermediateOutputPath>$(TestsDirectory)obj\</BaseIntermediateOutputPath>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Bundle.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixBalExtension">
+      <HintPath>$(WixExtDir)\WixBalExtension.dll</HintPath>
+      <Name>WixBalExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <Import Project="$(TestsDirectory)packages\vcredist.wixproj.vc143\build\vcredist.wixproj.vc143.targets" />
+</Project>
